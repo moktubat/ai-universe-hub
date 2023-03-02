@@ -7,7 +7,16 @@ const fetchCard = () => {
 
 const displayCards = cards => {
     const cardsContainer = document.getElementById('cards-container');
-    cards.tools = cards.tools.slice(0, 6);
+    const showAll = document.getElementById('show-all');
+    if(cards.tools.length > 6){
+        cards.tools = cards.tools.slice(0, 6);
+        showAll.classList.remove('d-none');
+        
+    }
+    else{
+        showAll.classList.add('d-none');
+    }
+
     cards.tools.forEach(card => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('col', 'pb-4');
@@ -44,6 +53,19 @@ const displayCards = cards => {
         cardsContainer.appendChild(cardDiv);
 
     });
+    spinerSection(false);
 }
+
+const loadSpinner = isLoading =>{
+    const spinerSection = document.getElementById('spinner');
+    if(isLoading){
+        spinerSection.classList.remove('d-none')
+    }
+    else(
+        spinerSection.classList.add('d-none')
+    )
+}
+
+
 
 fetchCard();
