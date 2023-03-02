@@ -40,7 +40,9 @@ const displayCards = cards => {
                   </div>
 
                   <div class="col align-self-end">
-                  <button type="button" class="btn btn-primary"><i class="fa-solid fa-arrow-right"></i></button>
+                  <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cardModal">
+                    <i class="fa-solid fa-arrow-right"></i>
+                  </button>
                   
                   </div>
                 </div>
@@ -53,19 +55,32 @@ const displayCards = cards => {
         cardsContainer.appendChild(cardDiv);
 
     });
-    spinerSection(false);
+    // spinerSection(false);
 }
 
-const loadSpinner = isLoading =>{
-    const spinerSection = document.getElementById('spinner');
-    if(isLoading){
-        spinerSection.classList.remove('d-none')
-    }
-    else(
-        spinerSection.classList.add('d-none')
-    )
-}
+// const loadSpinner = isLoading =>{
+//     const spinerSection = document.getElementById('spinner');
+//     if(isLoading){
+//         spinerSection.classList.remove('d-none')
+//     }
+//     else(
+//         spinerSection.classList.add('d-none')
+//     )
+// }
 
 
+const fetchShowCardDetail = id => {
+    console.log(id);
+    const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => console.log(data));
+};
+
+// // const showCardDetail = (cardDetail) =>{
+// //     document.getElementById('news-body').innerHTML = `
+
+// //     `;
+// // }
 
 fetchCard();
