@@ -70,17 +70,55 @@ const displayCards = cards => {
 
 
 const fetchShowCardDetail = id => {
-    console.log(id);
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
       .then((res) => res.json())
-      .then((data) => console.log(data));
+      .then((data) => showCardDetail(data.data));
 };
 
-// // const showCardDetail = (cardDetail) =>{
-// //     document.getElementById('news-body').innerHTML = `
+const showCardDetail = cardDetail =>{
+    
+    const cardModadTitle = document.getElementById('cardModalLabel');
+    cardModadTitle.innerText = cardDetail.tool_name;
 
-// //     `;
-// // }
+    const cardDiscription = document.getElementById('card-discription');
+    cardDiscription.innerText = cardDetail.description;
+
+    const cardPrice1 = document.getElementById('price1');
+    cardPrice1.innerText = cardDetail.pricing[0].price;
+	
+    const cardPlan1 = document.getElementById('plan1');
+    cardPlan1.innerText = cardDetail.pricing[0].plan;
+
+    const cardPrice2 = document.getElementById('price2');
+    cardPrice2.innerText = cardDetail.pricing[1].price;
+	
+    const cardPlan2 = document.getElementById('plan2');
+    cardPlan2.innerText = cardDetail.pricing[1].plan;
+
+    const cardPrice3 = document.getElementById('price3');
+    cardPrice3.innerText = cardDetail.pricing[2].price;
+	
+    const cardPlan3 = document.getElementById('plan3');
+    cardPlan3.innerText = cardDetail.pricing[2].plan;
+
+    const cardFeatureName1 = document.getElementById('feature_name1');
+    cardFeatureName1.innerText = cardDetail.features[1].feature_name;
+    const cardFeatureName2 = document.getElementById('feature_name2');
+    cardFeatureName2.innerText = cardDetail.features[2].feature_name;
+	const cardFeatureName3 = document.getElementById('feature_name3');
+    cardFeatureName3.innerText = cardDetail.features[3].feature_name;
+
+
+    document.getElementById('image').src = cardDetail.image_link[0];
+
+    const cardInput = document.getElementById('card-input');
+    cardInput.innerText = cardDetail.input_output_examples[0].input;
+
+    const cardOutput = document.getElementById('card-output');
+    cardOutput.innerText = cardDetail.input_output_examples[0].output;
+
+
+}   
 
 fetchCard();
