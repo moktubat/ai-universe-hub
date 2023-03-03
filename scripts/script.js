@@ -1,15 +1,16 @@
-const fetchCard = () => {
+const fetchCard = (load) => {
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch (url)
     .then(res => res.json())
-    .then(data => displayCards(data.data))
+    .then(data => displayCards(data.data, load))
 }
 
-const displayCards = cards => {
+const displayCards = (cards, load) => {
     const cardsContainer = document.getElementById('cards-container');
+    cardsContainer.innerHTML = ""
     const showAll = document.getElementById('show-all');
-    if(cards.tools.length > 6){
-        cards.tools = cards.tools.slice(0, 6);
+    if(load){
+        cards.tools = cards.tools.slice(0, load);
         showAll.classList.remove('d-none');
         
     }
@@ -60,14 +61,21 @@ const displayCards = cards => {
         })
 
     });
-    spinerSection(false);
+    loadSpinner(false);
 }
 
 document.getElementById('btn-show-all').addEventListener('click', function(){
-    const url = 'https://openapi.programming-hero.com/api/ai/tools';
-    fetch (url)
-    .then(res => res.json())
-    .then(data => displayCards(data.data.slice(6, 12)))
+    // const url = 'https://openapi.programming-hero.com/api/ai/tools';
+    // fetch (url)
+    // .then(res => res.json())
+    // .then(data => displayCards(data.data.slice(0, 12)))
+
+    loadSpinner(true);
+    setTimeout( function (){
+        fetchCard();
+    }, 20000);
+    // fetchCard();
+
 })
 
 const loadSpinner = isLoading =>{
@@ -149,4 +157,4 @@ const showAllCardTogether = () => {
       });
   };
 
-fetchCard();
+fetchCard(6);
