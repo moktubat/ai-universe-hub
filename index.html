@@ -39,22 +39,25 @@
                 <div class="modal-content">
                     <div class="modal-header">
                     <h1 class="modal-title fs-5" id="cardModalLabel"></h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <div class="position-relative">
+                        <button type="button" class="btn-close position-absolute top-0 start-50 translate-middle bg-danger rounded-5 p-2" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <div class="modal-body">
+                    
+                    </div>
+                    <div class="modal-body mb-5 mx-2">
                         <div class="row">
-                            <div class="col-sm-6 border rounded border-danger py-2">
+                            <div class="col-sm-6 border rounded border-danger py-3">
                                 <h4 id="card-discription"></h4>
                                 <div class="row container text-center">
-                                    <div class="col-4 py-5 text-success">
+                                    <div class="col-4 py-3 text-success">
                                         <h5 id="price1"></h5>
                                         <h5 id="plan1"></h5>
                                     </div>
-                                    <div class="col-4 py-5 text-warning">
+                                    <div class="col-4 py-3 text-warning">
                                         <h5 id="price2"></h5>
                                         <h5 id="plan2"></h5>
                                     </div>
-                                    <div class="col-4 py-5 text-danger">
+                                    <div class="col-4 py-3 text-danger">
                                         <h5 id="price3"></h5>
                                         <h5 id="plan3"></h5>
                                     </div>
@@ -64,23 +67,26 @@
                                         <h4>Features</h4>
                                         <li id="feature_name1"></li>
                                         <li id="feature_name2"></li>
-                                        <li id="feature_name2"></li>
+                                        <li id="feature_name3"></li>
                                     </div>
 
                                     <div class="col-6">
                                         <h4>Integrations</h4>
+                                        <li id="integrations1"></li>
+                                        <li id="integrations2"></li>
+                                        <li id="integrations3"></li>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-sm-6 text-center">
-                                <img src="" id="image" class="img-fluid rounded py-2"/>
+                                <div class="position-relative">
+                                    <img src="" id="image" class="img-fluid rounded py-4"/>
+                                    <p style="position: absolute; top: 30px; right: 10px;" class="badge text-bg-danger accuracy py-2"><span id="accuracy"></span> % accuracy</p>
+                                </div>
                                 <h4 id="card-input"></h4>
                                 <p id="card-output"></p>
                             </div>
                         </div>                   
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                     </div>
                 </div>
                 </div>

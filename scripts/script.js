@@ -109,8 +109,16 @@ const showCardDetail = cardDetail =>{
 	const cardFeatureName3 = document.getElementById('feature_name3');
     cardFeatureName3.innerText = cardDetail.features[3].feature_name;
 
+    const cardIntegrations1 = document.getElementById('integrations1');
+    cardIntegrations1.innerText = cardDetail.integrations[0];
+	const cardIntegrations2 = document.getElementById('integrations2');
+    cardIntegrations2.innerText = cardDetail.integrations[1];
+	const cardIntegrations3 = document.getElementById('integrations3');
+    cardIntegrations3.innerText = cardDetail.integrations[2];
 
     document.getElementById('image').src = cardDetail.image_link[0];
+    const cardAccuracy = document.getElementById('accuracy');
+    cardAccuracy.innerText = cardDetail.accuracy.score * 100;
 
     const cardInput = document.getElementById('card-input');
     cardInput.innerText = cardDetail.input_output_examples[0].input;
