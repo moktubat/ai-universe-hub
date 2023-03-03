@@ -25,12 +25,9 @@ const displayCards = cards => {
             <img src="${card.image}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">Features</h5>
-                <ol>
-                <li class="card-text">${card.features[0] ? card.features[0] : ''}</li>
-                <li class="card-text">${card.features[1] ? card.features[1] : ''}</li>
-                <li class="card-text">${card.features[2] ? card.features[2] : ''}</li>
-                <li class="card-text">${card.features[3] ? card.features[3] : ''}</li>
-                </ol>
+            <ol id="${card.id}" class="list-group list-group-numbered text-start">
+                    
+            </ol>
             </div>
             <div class="card-footer border-0 bg-body">
                 <div class="row">
@@ -39,7 +36,7 @@ const displayCards = cards => {
                     <p class="card-text"><i class="fa-regular fa-calendar-days"></i> <small class="text-muted">${card.published_in}</small></p>
                   </div>
 
-                  <div class="col align-self-end">
+                  <div class="col text-end">
                   <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cardModal">
                     <i class="fa-solid fa-arrow-right"></i>
                   </button>
@@ -53,6 +50,14 @@ const displayCards = cards => {
         </div>
         `;
         cardsContainer.appendChild(cardDiv);
+
+        const featureContainer = document.getElementById(card.id);
+        card.features.forEach((feature) =>{
+        const featerItem = document.createElement('li');
+        featerItem.classList.add('list-group-item');
+        featerItem.innerText = feature;
+        featureContainer.appendChild(featerItem);
+        })
 
     });
     spinerSection(false);
