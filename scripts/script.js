@@ -1,3 +1,4 @@
+// Data Load and Fetching
 const fetchCard = (load) => {
     const url = 'https://openapi.programming-hero.com/api/ai/tools';
     fetch (url)
@@ -5,11 +6,13 @@ const fetchCard = (load) => {
     .then(data => displayCards(data.data, load))
 }
 
+// Display Card Area with fucntion
 const displayCards = (cards, load) => {
     const cardsContainer = document.getElementById('cards-container');
     cardsContainer.innerHTML = ""
     const showAll = document.getElementById('show-all');
     if(load){
+        // // display 6 cards only
         cards.tools = cards.tools.slice(0, load);
         showAll.classList.remove('d-none');
         
@@ -17,10 +20,11 @@ const displayCards = (cards, load) => {
     else{
         showAll.classList.add('d-none');
     }
-
+    // Get Single Card from card group with .forEach loop
     cards.tools.forEach(card => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('col', 'pb-4');
+        // Create .innerHTML for show display card item in card area
         cardDiv.innerHTML = `
         <div class="card h-100 shadow">
             <img src="${card.image}" class="card-img-top" alt="...">
@@ -38,6 +42,7 @@ const displayCards = (cards, load) => {
                   </div>
 
                   <div class="col text-end">
+                //   On click button for display single card details
                   <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-outline-danger rounded-circle" data-bs-toggle="modal" data-bs-target="#cardModal">
                     <i class="fa-solid fa-arrow-right"></i>
                   </button>
@@ -51,7 +56,7 @@ const displayCards = (cards, load) => {
         </div>
         `;
         cardsContainer.appendChild(cardDiv);
-
+        // add features dynamicly in featuresArea 
         const featureContainer = document.getElementById(card.id);
         card.features.forEach((feature) =>{
         const featerItem = document.createElement('li');
@@ -64,6 +69,7 @@ const displayCards = (cards, load) => {
     loadSpinner(false);
 }
 
+// show all card element
 document.getElementById('btn-show-all').addEventListener('click', function(){
     // const url = 'https://openapi.programming-hero.com/api/ai/tools';
     // fetch (url)
@@ -78,6 +84,7 @@ document.getElementById('btn-show-all').addEventListener('click', function(){
 
 })
 
+// Spinner Area
 const loadSpinner = isLoading =>{
     const spinerSection = document.getElementById('spinner');
     if(isLoading){
@@ -89,6 +96,7 @@ const loadSpinner = isLoading =>{
 }
 
 
+// Fetching Single Card Detail for Card Modal
 const fetchShowCardDetail = id => {
     const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
     fetch(url)
@@ -96,6 +104,7 @@ const fetchShowCardDetail = id => {
       .then((data) => showCardDetail(data.data));
 };
 
+// Function for display card details with modal
 const showCardDetail = (modal) =>{
     console.log(modal);
     const cardModalDetail = document.getElementById('modal-body');
@@ -155,6 +164,7 @@ const showCardDetail = (modal) =>{
     `;
 }
 
+// For Show rest 6 card 
 const showAllCardTogether = () => {
     fetch('https://openapi.programming-hero.com/api/ai/tools')
       .then((res) => res.json())
