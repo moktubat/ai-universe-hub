@@ -22,7 +22,7 @@ const displayCards = (cards, load) => {
         const cardDiv = document.createElement('div');
         cardDiv.classList.add('col', 'pb-4');
         cardDiv.innerHTML = `
-        <div class="card h-100">
+        <div class="card h-100 shadow">
             <img src="${card.image}" class="card-img-top" alt="...">
             <div class="card-body">
             <h5 class="card-title">Features</h5>
@@ -38,7 +38,7 @@ const displayCards = (cards, load) => {
                   </div>
 
                   <div class="col text-end">
-                  <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#cardModal">
+                  <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-outline-danger rounded-circle" data-bs-toggle="modal" data-bs-target="#cardModal">
                     <i class="fa-solid fa-arrow-right"></i>
                   </button>
                   
@@ -96,57 +96,63 @@ const fetchShowCardDetail = id => {
       .then((data) => showCardDetail(data.data));
 };
 
-const showCardDetail = cardDetail =>{
-    
-    const cardModadTitle = document.getElementById('cardModalLabel');
-    cardModadTitle.innerText = cardDetail.tool_name;
+const showCardDetail = (modal) =>{
+    console.log(modal);
+    const cardModalDetail = document.getElementById('modal-body');
+    cardModalDetail.innerHTML = `
+        <div class="row">
+        <div class="col-sm-6 border rounded border-danger bg-danger-subtle bg-opacity-10 my-3 py-3 shadow-lg">
+            <h5 class="pb-3">${modal.description}</h5>
+            <div class="row container text-center gap-2 ">
+                <div class="container shadow-lg col-3 py-3 text-success bg-light rounded">
+                    <div class="card-body">
+                        <h6>${modal.pricing[0].price ? modal.pricing[0].price : "Free of Cost"}</h6>
+                        <h6>${modal.pricing[0].plan}</h6>
+                    </div>
+                </div>
+                <div class="container shadow-lg col-3 py-3 text-warning bg-light rounded">
+                    <div class="card-body">
+                    <h6>${modal.pricing[1].price}</h6>
+                    <h6>${modal.pricing[1].plan}</h6>
+                    </div>
+                </div>
+                <div class="container shadow-lg col-3 py-3 text-danger bg-light rounded">
+                    <div class="card-body">
+                    <h6>${modal.pricing[2].price}</h6>
+                    <h6>${modal.pricing[2].plan}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row container pt-3">
+                <div class="col-6">
+                    <h4>Features</h4>
+                    <ul>
+                        <li>${modal.features[1].feature_name}</li>
+                        <li>${modal.features[2].feature_name}</li>
+                        <li>${modal.features[3].feature_name}</li>
+                    </ul>
+                </div>
 
-    const cardDiscription = document.getElementById('card-discription');
-    cardDiscription.innerText = cardDetail.description;
-
-    const cardPrice1 = document.getElementById('price1');
-    cardPrice1.innerText = cardDetail.pricing[0].price;
-	
-    const cardPlan1 = document.getElementById('plan1');
-    cardPlan1.innerText = cardDetail.pricing[0].plan;
-
-    const cardPrice2 = document.getElementById('price2');
-    cardPrice2.innerText = cardDetail.pricing[1].price;
-	
-    const cardPlan2 = document.getElementById('plan2');
-    cardPlan2.innerText = cardDetail.pricing[1].plan;
-
-    const cardPrice3 = document.getElementById('price3');
-    cardPrice3.innerText = cardDetail.pricing[2].price;
-	
-    const cardPlan3 = document.getElementById('plan3');
-    cardPlan3.innerText = cardDetail.pricing[2].plan;
-
-    const cardFeatureName1 = document.getElementById('feature_name1');
-    cardFeatureName1.innerText = cardDetail.features[1].feature_name;
-    const cardFeatureName2 = document.getElementById('feature_name2');
-    cardFeatureName2.innerText = cardDetail.features[2].feature_name;
-	const cardFeatureName3 = document.getElementById('feature_name3');
-    cardFeatureName3.innerText = cardDetail.features[3].feature_name;
-
-    const cardIntegrations1 = document.getElementById('integrations1');
-    cardIntegrations1.innerText = cardDetail.integrations[0];
-	const cardIntegrations2 = document.getElementById('integrations2');
-    cardIntegrations2.innerText = cardDetail.integrations[1];
-	const cardIntegrations3 = document.getElementById('integrations3');
-    cardIntegrations3.innerText = cardDetail.integrations[2];
-
-    document.getElementById('image').src = cardDetail.image_link[0];
-    const cardAccuracy = document.getElementById('accuracy');
-    cardAccuracy.innerText = cardDetail.accuracy.score * 100;
-
-    const cardInput = document.getElementById('card-input');
-    cardInput.innerText = cardDetail.input_output_examples[0].input;
-
-    const cardOutput = document.getElementById('card-output');
-    cardOutput.innerText = cardDetail.input_output_examples[0].output;
-
-
+                <div class="col-6">
+                    <h4>Integrations</h4>
+                    <ul>
+                        <li>${modal.integrations[0]}</li>
+                        <li>${modal.integrations[1]}</li>
+                        <li>${modal.integrations[2]}</li>
+                    </ul>                    
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 text-center">
+            <div class="position-relative">
+                <img src="${modal.image_link[0]}" id="image" class="img-fluid shadow-lg py-4"/>
+                <p style="position: absolute; top: 30px; right: 10px;" class="badge text-bg-danger accuracy py-2">${modal.accuracy.score * 100} % accuracy</p>
+            </div>
+            <h5>${modal.input_output_examples[0].input}</h5>
+            <p>${modal.input_output_examples[0].output}</p>
+        </div>
+    </div>
+    `;
 }
 
 const showAllCardTogether = () => {
