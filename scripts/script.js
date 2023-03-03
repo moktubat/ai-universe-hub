@@ -42,7 +42,7 @@ const displayCards = (cards, load) => {
                   </div>
 
                   <div class="col text-end">
-                //   On click button for display single card details
+
                   <button onclick="fetchShowCardDetail('${card.id}')" type="button" class="btn btn-outline-danger rounded-circle" data-bs-toggle="modal" data-bs-target="#cardModal">
                     <i class="fa-solid fa-arrow-right"></i>
                   </button>
@@ -115,20 +115,20 @@ const showCardDetail = (modal) =>{
             <div class="row container text-center gap-2 ">
                 <div class="container shadow-lg col-3 py-3 text-success bg-light rounded">
                     <div class="card-body">
-                        <h6>${modal.pricing[0].price ? modal.pricing[0].price : "Free of Cost"}</h6>
-                        <h6>${modal.pricing[0].plan}</h6>
+                        <h6>${modal.pricing ? modal.pricing[0].price : 'Free of Cost'}</h6>
+                        <h6>${modal.pricing[0].plan ? modal.pricing[0].plan : 'Not plan yet'}</h6>
                     </div>
                 </div>
                 <div class="container shadow-lg col-3 py-3 text-warning bg-light rounded">
                     <div class="card-body">
-                    <h6>${modal.pricing[1].price}</h6>
-                    <h6>${modal.pricing[1].plan}</h6>
+                    <h6>${modal.pricing ? modal.pricing[1].price : 'Free of Cost'}</h6>
+                    <h6>${modal.pricing[1].plan ? modal.pricing[1].plan : 'Not plan yet'}</h6>
                     </div>
                 </div>
                 <div class="container shadow-lg col-3 py-3 text-danger bg-light rounded">
                     <div class="card-body">
-                    <h6>${modal.pricing[2].price}</h6>
-                    <h6>${modal.pricing[2].plan}</h6>
+                    <h6>${modal.pricing ? modal.pricing[2].price : 'Free of Cost'}</h6>
+                    <h6>${modal.pricing[2].plan ? modal.pricing[2].plan : 'Not plan yet'}</h6>
                     </div>
                 </div>
             </div>
