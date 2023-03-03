@@ -55,18 +55,25 @@ const displayCards = cards => {
         cardsContainer.appendChild(cardDiv);
 
     });
-    // spinerSection(false);
+    spinerSection(false);
 }
 
-// const loadSpinner = isLoading =>{
-//     const spinerSection = document.getElementById('spinner');
-//     if(isLoading){
-//         spinerSection.classList.remove('d-none')
-//     }
-//     else(
-//         spinerSection.classList.add('d-none')
-//     )
-// }
+document.getElementById('btn-show-all').addEventListener('click', function(){
+    const url = 'https://openapi.programming-hero.com/api/ai/tools';
+    fetch (url)
+    .then(res => res.json())
+    .then(data => displayCards(data.data.slice(6, 12)))
+})
+
+const loadSpinner = isLoading =>{
+    const spinerSection = document.getElementById('spinner');
+    if(isLoading){
+        spinerSection.classList.remove('d-none')
+    }
+    else(
+        spinerSection.classList.add('d-none')
+    )
+}
 
 
 const fetchShowCardDetail = id => {
@@ -127,6 +134,14 @@ const showCardDetail = cardDetail =>{
     cardOutput.innerText = cardDetail.input_output_examples[0].output;
 
 
-}   
+}
+
+const showAllCardTogether = () => {
+    fetch('https://openapi.programming-hero.com/api/ai/tools')
+      .then((res) => res.json())
+      .then((data) => {
+        displayCards(data.data);
+      });
+  };
 
 fetchCard();
