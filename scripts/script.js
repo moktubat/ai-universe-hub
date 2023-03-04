@@ -19,7 +19,7 @@ const displayCards = (cards, load) => {
     }
     else{
         showAll.classList.add('d-none');
-    }
+    }    
     // Get Single Card from card group with .forEach loop
     cards.tools.forEach(card => {
         const cardDiv = document.createElement('div');
@@ -173,20 +173,19 @@ const showAllCardTogether = () => {
   };
 
 
-const sorting = (a, b) => {
-    const dateA = new Date(a.published_in);
-    const dateB = new Date(b.published_in);
-    if (dateA > dateB) {
-    return 1;
-    }
-    else if (dateA < dateB) { return -1;
-    }
-    else {
-    return 0;
-    }
-    };
-    document.getElementById("sorting-date").addEventListener("click", function () {
-    console.log(datas.sort(sorting));
-    });
+  
+// const sorting = (a, b) => {
+//     const dateA = new Date(a.published_in);
+//     const dateB = new Date(b.published_in);
+//     if (dateA > dateB) {
+//     return 1;
+//     }
+//     else if (dateA < dateB) { return -1;
+//     }
+//     else {
+//     return 0;
+//     }
+//     };
+    
 
 fetchCard(6);
